@@ -1,0 +1,376 @@
+<title>One of Them Previz Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a single reading column like a production bible; slate-style condensed labels, timecode in mono, headlight-amber as the one accent. */
+:root{
+  --bg:#f3f4f6; --surface:#ffffff; --ink:#151a22; --muted:#5a6372; --line:#d9dde3;
+  --accent:#a8690a; --accent-soft:#f6ead3; --night:#1d2633;
+  --v:#2b62d9; --r:#c8352b; --d:#c99a06; --o:#8c8679;
+  --font-display:"Barlow Condensed","Arial Narrow",sans-serif;
+  --font-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0e1218; --surface:#161c25; --ink:#e6e9ee; --muted:#9aa3b1; --line:#2a3340;
+  --accent:#f0b13c; --accent-soft:#2c2412; --night:#0a0d12;
+  --v:#6f9bff; --r:#ff6b5e; --d:#f2c94c; --o:#c9c3b6; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e1218; --surface:#161c25; --ink:#e6e9ee; --muted:#9aa3b1; --line:#2a3340;
+  --accent:#f0b13c; --accent-soft:#2c2412; --night:#0a0d12;
+  --v:#6f9bff; --r:#ff6b5e; --d:#f2c94c; --o:#c9c3b6; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:15.5px;line-height:1.6;padding-inline:20px;padding-block:0 64px}
+.wrap{max-width:960px;margin:0 auto}
+header.slate{padding-block:48px 28px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.14em;font-weight:600;color:var(--accent);font-size:15px}
+h1{font-family:var(--font-display);font-weight:700;font-size:clamp(40px,7vw,64px);line-height:1;margin:6px 0 14px;text-wrap:balance;letter-spacing:.01em}
+h2{font-family:var(--font-display);font-weight:700;font-size:30px;line-height:1.1;margin:0 0 12px;text-transform:uppercase;letter-spacing:.03em;text-wrap:balance}
+h3{font-family:var(--font-display);font-weight:600;font-size:21px;margin:22px 0 6px;letter-spacing:.02em}
+p{max-width:68ch;margin:0 0 12px}
+.lede{font-size:17px;color:var(--ink)}
+.muted{color:var(--muted)}
+section{padding-block:40px 8px;border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:0}
+.facts{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:18px}
+.fact{display:flex;flex-direction:column}
+.fact b{font-family:var(--font-mono);font-weight:500;font-size:20px;font-variant-numeric:tabular-nums}
+.fact span{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.12em;font-size:13px;color:var(--muted)}
+code,.mono{font-family:var(--font-mono);font-size:.88em}
+.tl{display:flex;width:100%;height:58px;border-radius:4px;overflow:hidden;margin:18px 0 6px;background:var(--night)}
+.tl div{display:flex;flex-direction:column;justify-content:center;padding:0 8px;color:#e9edf3;border-right:1px solid rgba(255,255,255,.12);min-width:0;overflow:hidden}
+.tl div:last-child{border-right:0}
+.tl div.crash{background:linear-gradient(180deg,rgba(240,177,60,.28),rgba(240,177,60,.12))}
+.tl b{font-family:var(--font-display);font-size:14px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tl small{font-family:var(--font-mono);font-size:11px;opacity:.8;white-space:nowrap}
+.tl-legend{font-size:13px;color:var(--muted)}
+.tbl{overflow-x:auto;margin:14px 0 8px;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.1em;font-weight:600;font-size:13px;color:var(--muted);background:var(--bg);white-space:nowrap}
+td.num,td.tc{font-family:var(--font-mono);font-variant-numeric:tabular-nums;white-space:nowrap;font-size:13px}
+pre{font-family:var(--font-mono);font-size:13px;line-height:1.55;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:16px 18px;overflow-x:auto;margin:12px 0}
+pre .c{color:var(--muted)}
+.pill{display:inline-block;font-family:var(--font-display);text-transform:uppercase;letter-spacing:.08em;font-size:12px;font-weight:600;padding:1px 8px;border-radius:99px;border:1px solid var(--line);white-space:nowrap}
+.pill.have{color:#2f7d4f;border-color:currentColor}
+.pill.build{color:var(--accent);border-color:currentColor}
+.pill.you{color:var(--r);border-color:currentColor}
+.swatch{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:8px;vertical-align:-1px}
+.phase{display:grid;grid-template-columns:72px 1fr;gap:14px;padding-block:16px;border-top:1px solid var(--line)}
+.phase:first-of-type{border-top:0}
+.phase .n{font-family:var(--font-display);font-weight:700;font-size:34px;color:var(--accent);line-height:1}
+.phase .n small{display:block;font-size:12px;letter-spacing:.12em;color:var(--muted);font-weight:600;margin-top:4px}
+.phase h3{margin-top:0}
+.phase ul{margin:6px 0 0;padding-left:18px}
+.phase li{margin:3px 0;max-width:72ch}
+.who{font-size:13px;color:var(--muted);margin-top:8px}
+.who b{color:var(--ink);font-weight:600}
+.callout{background:var(--accent-soft);border-left:3px solid var(--accent);padding:12px 16px;border-radius:0 6px 6px 0;margin:14px 0;max-width:72ch}
+.callout p:last-child{margin-bottom:0}
+ol.q{padding-left:22px;max-width:74ch}
+ol.q li{margin:8px 0}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.two > div{min-width:0}
+@media (max-width:560px){.phase{grid-template-columns:1fr}.tl b{font-size:11px}.tl small{display:none}}
+</style>
+
+<div class="wrap">
+<header class="slate">
+  <div class="eyebrow">Previz plan · Draft 1 · built from Script Draft 3 &amp; Shot List Draft 3</div>
+  <h1>One of Them</h1>
+  <p class="lede">Rough blocking previz in Unreal Engine 5.8: colour-coded mannequins posed and keyframed with Control Rig, basic cine cameras, and every one of the 131 timed shots laid out in Sequencer under its shot-list name, at the shot list's exact durations.</p>
+  <div class="facts">
+    <div class="fact"><b>15:00</b><span>Runtime</span></div>
+    <div class="fact"><b>21,600</b><span>Frames @ 24 fps</span></div>
+    <div class="fact"><b>131</b><span>Timed shots</span></div>
+    <div class="fact"><b>9 / 7</b><span>Scenes / sequences</span></div>
+    <div class="fact"><b>4</b><span>Characters</span></div>
+    <div class="fact"><b>72%</b><span>Runtime at crash site</span></div>
+  </div>
+</header>
+
+<section id="approach">
+  <h2>Approach</h2>
+  <p>The film is mostly one location played four times. Passes 1–4 at the crash site run from 3:00 to 13:45, which is 645 of the 900 seconds. Every pass opens on the same reset master, cuts to the same radio insert and frozen-rain wide, and ends on black. So the build order follows that: the crash site goes in first and gets locked, pass 1 is animated and shot, then passes 2–4 reuse its marks, set and matched cameras. The opening car scenes, the run and the return come after.</p>
+  <p>Sequencer is set up the same way as the shot list. One master sequence holds seven sequence-level sub-sequences that match the script's timestamps exactly. Each of those holds a shot track with one shot asset per row of the spreadsheet. Character animation lives in one scene-level layer per scene, so a dialogue scene is performed once and covered by many cameras, the way it would be on set. Shots then only carry their camera and anything specific to that shot, such as inserts.</p>
+  <p>The first deliverable is a timed skeleton: a 15:00 master of placeholder cameras, in which every shot already has its correct name, duration and lens. It can be watched before any character moves, which confirms the pacing against the shot list straight away.</p>
+</section>
+
+<section id="structure">
+  <h2>Sequence map</h2>
+  <div class="tl" role="img" aria-label="Timeline of seven sequences across 15 minutes">
+    <div style="flex:90"><b>SQ01 Warning</b><small>0:00</small></div>
+    <div style="flex:90"><b>SQ02 Road</b><small>1:30</small></div>
+    <div class="crash" style="flex:90"><b>SQ03 Pass 1</b><small>3:00</small></div>
+    <div class="crash" style="flex:150"><b>SQ04 Pass 2</b><small>4:30</small></div>
+    <div class="crash" style="flex:180"><b>SQ05 Pass 3</b><small>7:00</small></div>
+    <div class="crash" style="flex:225"><b>SQ06 Pass 4</b><small>10:00</small></div>
+    <div style="flex:75"><b>SQ07 Return</b><small>13:45</small></div>
+  </div>
+  <p class="tl-legend">Widths are to scale. Amber blocks share the crash-site set and reset master.</p>
+
+  <div class="tbl"><table>
+    <thead><tr><th>Seq</th><th>Title</th><th>Scenes</th><th>Shots</th><th>Dur</th><th>Master TC in</th><th>Frames</th><th>Set</th></tr></thead>
+    <tbody>
+      <tr><td class="num">SQ01</td><td>The Warning</td><td>SC01 INT car (43 s, 10 shots)<br>SC02 EXT road (47 s, 11 shots)</td><td class="num">21</td><td class="num">90 s</td><td class="tc">00:00:00:00</td><td class="tc">0–2159</td><td>Car interior, road bend A</td></tr>
+      <tr><td class="num">SQ02</td><td>The Road</td><td>SC03 EXT road</td><td class="num">7</td><td class="num">90 s</td><td class="tc">00:01:30:00</td><td class="tc">2160–4319</td><td>Bends B–D, skid stretch, torn rail</td></tr>
+      <tr><td class="num">SQ03</td><td>Pass 1: Refusal</td><td>SC04 crash site</td><td class="num">19</td><td class="num">90 s</td><td class="tc">00:03:00:00</td><td class="tc">4320–6479</td><td>Crash site</td></tr>
+      <tr><td class="num">SQ04</td><td>Pass 2: Bargaining</td><td>SC05 crash site</td><td class="num">19</td><td class="num">150 s</td><td class="tc">00:04:30:00</td><td class="tc">6480–10079</td><td>Crash site</td></tr>
+      <tr><td class="num">SQ05</td><td>Pass 3: The Wrong Name</td><td>SC06 crash site</td><td class="num">23</td><td class="num">180 s</td><td class="tc">00:07:00:00</td><td class="tc">10080–14399</td><td>Crash site</td></tr>
+      <tr><td class="num">SQ06</td><td>Pass 4: The Faithful Version</td><td>SC07 crash site (ends on S07-28A)</td><td class="num">28</td><td class="num">225 s</td><td class="tc">00:10:00:00</td><td class="tc">14400–19799</td><td>Crash site → road</td></tr>
+      <tr><td class="num">SQ07</td><td>The Return</td><td>SC08 EXT road (19 s, 4 shots)<br>SC09 INT car (56 s, 10 shots)</td><td class="num">14</td><td class="num">75 s</td><td class="tc">00:13:45:00</td><td class="tc">19800–21599</td><td>Road bend A, car interior</td></tr>
+    </tbody>
+  </table></div>
+  <p class="muted">Frame ranges are master-level, assuming 24 fps. Each sequence also counts from frame 0 internally, so you can work on one sequence without opening the others.</p>
+</section>
+
+<section id="folders">
+  <h2>Folder structure &amp; naming</h2>
+  <p>Everything for the film lives under one root, so the Automotive Winter Scene pack and the test assets stay separate from it.</p>
+<pre><span class="c">/Game/OneOfThem/</span>
+  Cinematics/
+    OOT_Master                         <span class="c">master sequence, 0:00–15:00</span>
+    SQ01_TheWarning/
+      OOT_SQ01_TheWarning              <span class="c">sequence: shot track + anim layers</span>
+      SC01/
+        OOT_SC01_Anim                  <span class="c">scene-level character performance</span>
+        Shots/OOT_S01-01 … OOT_S01-10   <span class="c">one shot asset per spreadsheet row</span>
+      SC02/
+        OOT_SC02_Anim
+        Shots/OOT_S02-01 … OOT_S02-11
+    SQ02_TheRoad/        SC03/ …
+    SQ03_Pass1_Refusal/  SC04/ …
+    SQ04_Pass2_Bargaining/ SC05/ …
+    SQ05_Pass3_WrongName/  SC06/ …
+    SQ06_Pass4_Faithful/   SC07/ …     <span class="c">includes OOT_S07-28_Orbit</span>
+    SQ07_TheReturn/      SC08/ … SC09/ …
+  Maps/
+    OOT_Previz_P                       <span class="c">persistent level</span>
+    OOT_Set_GhatRoad · OOT_Set_CrashSite · OOT_Set_CarInterior
+    OOT_Light_Night                    <span class="c">moon, headlights, fog</span>
+  Characters/   Vikram · Rohan · Dev · OldMan   <span class="c">tinted mannequin MIs + pose library</span>
+  Props/        Car_Hero · Car_Wreck · Phone_Dev · Phone_Vikram · Clock · Guardrail
+  FX/           NS_Rain (freezable) · NS_Steam (freezable)
+  Cameras/      lens presets, orbit rig
+  Audio/Scratch scratch dialogue, radio song stand-in, crash SFX
+  Materials/</pre>
+
+  <div class="tbl"><table>
+    <thead><tr><th>Thing</th><th>Pattern</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td>Shot asset</td><td class="mono">OOT_&lt;shot no.&gt;</td><td class="mono">OOT_S04-14</td></tr>
+      <tr><td>Shot section label</td><td>exact spreadsheet number</td><td class="mono">S04-14</td></tr>
+      <tr><td>Camera</td><td class="mono">CAM_&lt;shot no.&gt;</td><td class="mono">CAM_S04-14</td></tr>
+      <tr><td>Scene anim layer</td><td class="mono">OOT_SC&lt;nn&gt;_Anim</td><td class="mono">OOT_SC05_Anim</td></tr>
+      <tr><td>Sequence</td><td class="mono">OOT_SQ&lt;nn&gt;_&lt;Title&gt;</td><td class="mono">OOT_SQ05_Pass3_WrongName</td></tr>
+      <tr><td>Folders inside a shot</td><td>Cameras · Characters · Props · FX</td><td>same in every shot</td></tr>
+    </tbody>
+  </table></div>
+  <p class="muted">If Unreal rejects the hyphen in an asset name, the asset falls back to <code>OOT_S04_14</code>. The label shown in Sequencer keeps the hyphen either way.</p>
+
+  <h3>The continuous orbit, S07-28A/B</h3>
+  <p>The shot list counts one unbroken orbit as two rows that sit across a scene change. It's built as a single 17-second shot asset, <code>OOT_S07-28_Orbit</code>. SQ06 plays the first 12 s as section S07-28A, and SQ07 plays the last 5 s of the same asset as S07-28B. The camera move is one move, so it can't drift between the two halves.</p>
+</section>
+
+<section id="sets">
+  <h2>Sets, props &amp; FX</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Item</th><th>What the script needs</th><th>Source</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Ghat road</td><td>Winding two-lane road at night, black forest both sides. Bend A is where the car stops, then three bends for the run, a skid stretch, and a torn guardrail over a steep slope.</td><td>Check the pack's <code>IceRoad</code> map for usable road geography. If it doesn't fit, greybox it with Modeling Tools.</td><td><span class="pill build">Build</span></td></tr>
+      <tr><td>Crash site</td><td>Clearing below the slope with trees. Car on its side, headlights burning into the trees. Marks for Vikram (foot of slope) and the Old Man (edge of the beam). Puddles beside the driver's door and at Vikram's feet.</td><td>Greybox</td><td><span class="pill build">Build first</span></td></tr>
+      <tr><td>Hero car</td><td>Sedan, right-hand drive (India). Rohan drives on the right, Dev front-left, Vikram rear. Working rear door, driver's window, wipers.</td><td>Control Rig's <code>SKM_Car_Template</code> rig if it scales to a sedan, otherwise a primitive blockout</td><td><span class="pill build">Build</span></td></tr>
+      <tr><td>Car interior</td><td>Seats, dashboard clock, radio console, windscreen frame, steering wheel</td><td>Blockout with removable panels so cameras can sit outside the shell, like shooting on a process trailer</td><td><span class="pill build">Build</span></td></tr>
+      <tr><td>Wreck</td><td>Same car on its side, with two motionless shapes inside. Its orientation is locked for all four passes.</td><td>Duplicate of the hero car, rotated and dented</td><td><span class="pill build">Build</span></td></tr>
+      <tr><td>Phones</td><td>Dev's phone shows AMMA (car, then on the wreck floor). Vikram's phone shows 11:47 and no signal. The two need to look different.</td><td>Two coloured slabs with text-render screens</td><td><span class="pill build">Build</span></td></tr>
+      <tr><td>Dashboard clock</td><td>Reads 11:47 throughout, then ticks to 11:48 in S09-07</td><td>Text render with keyed visibility between the two states</td><td><span class="pill build">Build</span></td></tr>
+      <tr><td>Rain &amp; steam</td><td>Normal rain, plus a frozen state where every drop hangs in the beam. Steam that rises, then hangs still.</td><td>Simple Niagara systems with simulation time keyed in Sequencer, so they can be frozen</td><td><span class="pill build">Build</span></td></tr>
+      <tr><td>Lighting</td><td>Night, with headlight beams as the main light at the crash site. Headlights go out at each reset.</td><td>Moonlight, two headlight spot lights on the car, fog. Intensity keyed per pass.</td><td><span class="pill build">Build</span></td></tr>
+      <tr><td>Mannequins</td><td>Four characters</td><td>Third Person content pack (Manny / Quinn plus their Control Rig). Not in the project yet.</td><td><span class="pill you">Needs you</span></td></tr>
+      <tr><td>Snow environment</td><td>The pack is snowy and daylit. The script is rain on an Indian ghat road.</td><td>Use it for road layout and set-dressing pieces only. Snow surfaces get swapped to wet asphalt or forest floor, or hidden.</td><td><span class="pill have">In project</span></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="characters">
+  <h2>Characters &amp; poses</h2>
+  <div class="two">
+    <div>
+      <p>Each mannequin gets one flat colour, used everywhere, so anyone can read a frame at a glance. Each also gets a floating name tag that can be switched off for clean renders.</p>
+      <div class="tbl"><table>
+        <thead><tr><th>Character</th><th>Colour</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Vikram, 34</td><td><span class="swatch" style="background:var(--v)"></span>Blue</td><td>Back seat, hands folded. This is the pose he returns to at the end.</td></tr>
+          <tr><td>Rohan, 31</td><td><span class="swatch" style="background:var(--r)"></span>Red</td><td>Driver, right-hand seat</td></tr>
+          <tr><td>Dev, 27</td><td><span class="swatch" style="background:var(--d)"></span>Yellow</td><td>Front passenger, holding his phone</td></tr>
+          <tr><td>The Old Man</td><td><span class="swatch" style="background:var(--o)"></span>Bone</td><td>Slight stoop, stands very still</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div>
+      <h3 style="margin-top:0">Pose library</h3>
+      <p>These are built once as Control Rig poses and reused everywhere:</p>
+      <ul>
+        <li>Seated driver, passenger and rear (hands folded)</li>
+        <li>Standing in the road, one hand raised</li>
+        <li>Standing still, hands open at the sides (pass 4)</li>
+        <li>Kneeling and gripping the door frame</li>
+        <li>Turning toward the cough</li>
+        <li>Holding a phone up and searching for signal</li>
+        <li>Run cycle, slip on wet rock, descending the slope</li>
+        <li>Slumped inside the wreck (Rohan, Dev)</li>
+      </ul>
+      <p class="muted">The 90-second run in SQ02 is the most demanding piece of keyframing. A looping run animation, for example from Epic's free Game Animation Sample, would cut that work a lot. Say if you'd rather keep everything hand-keyed.</p>
+    </div>
+  </div>
+</section>
+
+<section id="cameras">
+  <h2>Camera standards</h2>
+  <p>Every shot gets a Cine Camera with a default lens picked from its shot type in the spreadsheet. The spreadsheet's camera-angle column sets the height and position. Unless you give me your real camera and lens set, I'll assume Super 35 at 2.39:1 and a standard prime set.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Shot type in sheet</th><th>Default lens</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Wide / wide POV / full</td><td class="num">18–24 mm</td><td>Use 18 mm inside the car</td></tr>
+      <tr><td>Medium full / medium / two-shot</td><td class="num">32–40 mm</td><td>Keep the dialogue axis consistent at the crash site</td></tr>
+      <tr><td>Medium close-up</td><td class="num">50 mm</td><td>Most dialogue singles at the crash site</td></tr>
+      <tr><td>Close-up / close two-shot</td><td class="num">75–85 mm</td><td>S04-14 and S05-05 need both mouths readable</td></tr>
+      <tr><td>Insert / detail</td><td class="num">100 mm macro</td><td>Phones, clock, radio, puddle</td></tr>
+      <tr><td>Black frame</td><td>none</td><td>S04-19, S05-19, S06-23, S09-10. Fade track at full black.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Matched setups</h3>
+  <p>Shots that must match exactly are built once, then duplicated with the same camera transform and lens. A change to the reset master can then be pushed to all its copies.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Setup</th><th>Shots</th></tr></thead>
+    <tbody>
+      <tr><td>Crash-site reset master</td><td class="mono">S04-01 · S05-01 · S06-01 · S07-01</td></tr>
+      <tr><td>Radio insert in the wreck</td><td class="mono">S04-17 · S05-17 · S06-21</td></tr>
+      <tr><td>Frozen rain, then lights out</td><td class="mono">S04-18 · S05-18 · S06-22</td></tr>
+      <tr><td>Vikram's phone, 11:47, no signal</td><td class="mono">S04-05 · S05-04</td></tr>
+      <tr><td>AMMA phone on the wreck floor</td><td class="mono">S06-15 · S06-18 · S07-18</td></tr>
+      <tr><td>Dashboard clock</td><td class="mono">S01-02 · S09-01 · S09-07</td></tr>
+      <tr><td>Interior master</td><td class="mono">S01-01 · S09-02</td></tr>
+      <tr><td>Headlights find the Old Man</td><td class="mono">S01-08 · S08-01</td></tr>
+      <tr><td>Still puddle at road level</td><td class="mono">S02-01 · S08-02</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="gags">
+  <h2>Story beats mannequins can't play alone</h2>
+  <p>These beats carry the film but would vanish in grey blocking, so each gets a deliberate stand-in:</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Beat</th><th>Shots</th><th>How it reads in previz</th></tr></thead>
+    <tbody>
+      <tr><td>The Old Man's lips move a beat early</td><td class="mono">S04-14, S05-05, S05-03</td><td>Mannequins have no faces, so his dialogue appears as camera-locked caption text that shows up a beat before Vikram's, marked LIPS AHEAD</td></tr>
+      <tr><td>Puddle that doesn't ripple</td><td class="mono">S02-01, S04-11, S06-12, S08-02</td><td>A flat reflective disc with no rain hitting it, inside a rain field that otherwise covers the ground</td></tr>
+      <tr><td>Rain freezes, then black</td><td>end of each failed pass</td><td>Rain and steam simulation time keyed to stop. Headlight intensity keyed to 0, then fade to black.</td></tr>
+      <tr><td>Song cuts on a half-word</td><td>radio inserts</td><td>Scratch track on the audio track with an identical cut point every time. Plays through in S09-04.</td></tr>
+      <tr><td>Clock goes from 11:47 to 11:48</td><td class="mono">S09-07</td><td>Both states shown, with the change on a keyed frame</td></tr>
+      <tr><td>Rotation into the return</td><td class="mono">S07-28A/B</td><td>One orbit rig around both men. The wreck hides mid-orbit and the road set takes its place.</td></tr>
+      <tr><td>Distant, underwater voice</td><td class="mono">S09-03</td><td>Scratch line with a low-pass filter. Captioned in the review render.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="phases">
+  <h2>Build order</h2>
+
+  <div class="phase"><div class="n">0<small>Prep</small></div><div>
+    <h3>Lock decisions and add the mannequins</h3>
+    <ul>
+      <li>Confirm frame rate, aspect ratio and lens set (see open questions).</li>
+      <li>Add the Third Person content pack: Content Drawer → Add → Add Feature or Content Pack → Third Person. This brings in Manny, Quinn and their Control Rig.</li>
+      <li>Approve the wreck orientation proposal below.</li>
+      <li>Optional: scratch dialogue reads and a stand-in radio song. Real reads make the long dialogue passes time out properly.</li>
+    </ul>
+    <p class="who"><b>Who:</b> you · <b>Result:</b> unblocks everything after</p>
+  </div></div>
+
+  <div class="phase"><div class="n">1<small>Skeleton</small></div><div>
+    <h3>Timed Sequencer skeleton</h3>
+    <ul>
+      <li>Create the folder tree, the master, 7 sequences and 131 shot assets, at the frame ranges above.</li>
+      <li>Name every shot section exactly as in the sheet, and put a placeholder camera with its default lens in every shot.</li>
+      <li>Add the four black shots, marked frames for each scene start, and dialogue lines as marked frames.</li>
+    </ul>
+    <p class="who"><b>Who:</b> me, fully scripted through the editor connection · <b>Result:</b> a playable 15:00 master to check pacing against</p>
+  </div></div>
+
+  <div class="phase"><div class="n">2<small>Sets</small></div><div>
+    <h3>Crash site, then road, then car</h3>
+    <ul>
+      <li>Crash site: slope, clearing, wreck, marks, puddles, headlight beams, rain and steam.</li>
+      <li>Ghat road: bend A, the run bends, skid marks and the torn rail. Starts with a check of IceRoad.</li>
+      <li>Hero car and its blockout interior with removable panels. Phones, clock, radio.</li>
+    </ul>
+    <p class="who"><b>Who:</b> me · <b>You review:</b> set layout and wreck orientation, from top-down and marked-up viewport captures</p>
+  </div></div>
+
+  <div class="phase"><div class="n">3<small>Cast</small></div><div>
+    <h3>Mannequins and pose library</h3>
+    <ul>
+      <li>Four tinted mannequins with name tags, placed as level actors per set.</li>
+      <li>Control Rig pose library from the list above.</li>
+    </ul>
+    <p class="who"><b>Who:</b> me</p>
+  </div></div>
+
+  <div class="phase"><div class="n">4<small>Blocking</small></div><div>
+    <h3>Scene-level animation</h3>
+    <ul>
+      <li><b>SC04, Pass 1</b> first. It sets the reset position and the timing of the turn toward the cough.</li>
+      <li><b>SC05–SC07</b> next, reusing pass 1's marks. Each pass changes only what the script changes: the head turns early in pass 3, there's no reach for the phone in pass 4, and so on.</li>
+      <li><b>SC01–SC02</b>: car interior and the stop at the bend.</li>
+      <li><b>SC03</b>: the run, the skid marks and the gap in the rail.</li>
+      <li><b>SC08–SC09</b>: the return, mirroring SC01 and SC02.</li>
+    </ul>
+    <p class="who"><b>Who:</b> me, with your notes per scene. Fine performance touch-ups may be quicker by hand in places.</p>
+  </div></div>
+
+  <div class="phase"><div class="n">5<small>Cameras</small></div><div>
+    <h3>Framing every shot</h3>
+    <ul>
+      <li>Frame each shot from the sheet's angle and shot-type columns, then build the matched setups by duplication.</li>
+      <li>Moves: lateral track (S03-01), following track (S03-02), push-ins (S05-07, S05-12, S07-25), pans with turns, and the orbit.</li>
+    </ul>
+    <p class="who"><b>Who:</b> me · <b>You review:</b> a contact sheet of one frame per shot</p>
+  </div></div>
+
+  <div class="phase"><div class="n">6<small>Review</small></div><div>
+    <h3>Renders and editorial handoff</h3>
+    <ul>
+      <li>Movie Render Queue output per sequence plus the full master, with burn-ins for shot name, frame, lens and caption text.</li>
+      <li>EDL or FCPXML export from the master, so your editor can conform against the shot list.</li>
+      <li>Notes rounds per sequence, starting with the crash site.</li>
+    </ul>
+    <p class="who"><b>Who:</b> me, then you</p>
+  </div></div>
+</section>
+
+<section id="proposals">
+  <h2>Proposals for you to approve</h2>
+  <div class="callout">
+    <p><b>Wreck orientation.</b> The script doesn't say which side the car lands on, and the sheet asks for a decision. Vikram kneels at the driver's door in S04-10, so it has to be reachable. My proposal: the car rests on its left (passenger) side, tipped against a tree trunk at about 70°, so the driver's door on the right faces the foot of the slope at kneeling height. Dev ends up low inside the car, Rohan high. The headlights point across the clearing toward the Old Man's mark.</p>
+  </div>
+  <div class="callout">
+    <p><b>Rain in pass 4.</b> The sheet flags a continuity gap: page 13 says the rain "starts again" in pass 4, but no stop is written before it. My proposal: the rain thins to nothing during the long silence at S07-03, then comes back softly at S07-26 as written. To be confirmed by the director.</p>
+  </div>
+</section>
+
+<section id="questions">
+  <h2>Open questions</h2>
+  <ol class="q">
+    <li><b>Frame rate and aspect ratio.</b> Confirmed: 24 fps at 2.39:1.</li>
+    <li><b>Real camera and lenses.</b> Matching the virtual filmback and primes to the shoot makes the previz directly usable on set.</li>
+    <li><b>Scratch dialogue.</b> Can you record rough reads? Passes 2–4 are 150–225 s of dialogue, and timing them without audio is guesswork.</li>
+    <li><b>Run animation.</b> Hand-keyed only, or is a library run cycle acceptable for SQ02?</li>
+    <li><b>Environment.</b> Should I try to adapt IceRoad, or go straight to a clean greybox road?</li>
+    <li><b>Deadline and team.</b> Is it just you in Unreal, or will others pick up shots? That decides whether shots get split into separate levels for parallel work.</li>
+  </ol>
+</section>
+</div>

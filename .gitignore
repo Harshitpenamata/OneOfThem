@@ -1,0 +1,27 @@
+# Allowlist: only the film's own work is public. Third-party packs, generated folders,
+# renders and sound mixes (they contain licensed audio) stay local.
+/*
+!/.gitignore
+!/.gitattributes
+!/README.md
+!/OneOfThem.uproject
+!/Config/
+/Config/*.bak*
+!/Assets/
+/Assets/*
+!/Assets/One_of_Them_Script_Draft4.docx
+!/Content/
+/Content/*
+!/Content/OneOfThem/
+/Content/OneOfThem/Props/Car_Hero/
+/Content/OneOfThem/Audio/SFX/
+/Content/OneOfThem/Animation/Library/
+!/Previz/
+/Previz/Renders/
+/Previz/Sound/*.wav
+!/.claude/
+/.claude/*
+!/.claude/skills/
+/.claude/skills/*
+!/.claude/skills/previz-cinematography/
+ue-mcp.local.yml
